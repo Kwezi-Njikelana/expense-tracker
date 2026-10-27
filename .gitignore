@@ -416,3 +416,8 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+
+# Expense tracker
+dist/
+server/src/generated/
+!.env.example
