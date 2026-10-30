@@ -128,10 +128,3 @@ createdb expense_tracker
 | `npm run db:seed` | Reset and seed the demo account |
 | `npm run db:studio` | Open Prisma Studio |
 
-## Deploying
-
-The app deploys as a single Node service (Render, Railway or Fly.io) plus a Postgres database.
-
-- **Build command:** `npm ci && npm run build`
-- **Start command:** `npm run db:deploy && npm start`
-- **Environment:** `NODE_ENV=production`, `DATABASE_URL`, `JWT_SECRET`, plus `DATABASE_POOL_MAX` if your database limits connections
