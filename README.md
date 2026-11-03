@@ -6,6 +6,16 @@ A full-stack expense tracker with user accounts, a spending dashboard and a sear
 
 The project is an npm workspaces monorepo with three packages: `client`, `server` and `shared`.
 
+## Demo
+
+Click **Try the demo account** on the login page, or log in with:
+
+| Email | Password |
+| --- | --- |
+| `demo@example.com` | `password123` |
+
+The demo account has six months of sample expenses. It's shared, so anything you add or delete is visible to other visitors until the data is reset with `npm run db:seed`.
+
 ## Features
 
 - **Accounts:** sign up and log in, with sessions held in an httpOnly cookie. Every query is scoped to the signed-in user.
@@ -86,7 +96,7 @@ cp server/.env.example server/.env
 
 # 3. Create the tables and load demo data
 npm run db:migrate
-npm run db:seed        # demo@example.com / password123
+npm run db:seed        # creates the demo account (see Demo above)
 
 # 4. Start the API (port 8000) and the client (port 5173)
 npm run dev
