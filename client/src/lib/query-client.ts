@@ -1,6 +1,7 @@
 import { MutationCache, QueryCache, QueryClient } from '@tanstack/react-query';
 import { ApiError } from './api';
-import { authKeys } from '@/hooks/use-auth';
+import { onAuthMessage } from './auth-channel';
+import { applyLogout, authKeys, clearUserData } from '@/hooks/use-auth';
 
 // If any request finds the session has expired, mark the user as logged out
 // so the route guard sends them to the login page.
@@ -20,4 +21,15 @@ export const queryClient = new QueryClient({
         !(error instanceof ApiError && error.status >= 400 && error.status < 500) && failureCount < 2,
     },
   },
+});
+
+// React to logins/logouts made in other tabs.
+onAuthMessage((message) => {
+  if (message.type === 'logout') {
+    applyLogout(queryClient);
+  } else {
+    // Possibly a different user: drop the old data and refetch who we are.
+    clearUserData(queryClient);
+    void queryClient.invalidateQueries({ queryKey: authKeys.me });
+  }
 });
